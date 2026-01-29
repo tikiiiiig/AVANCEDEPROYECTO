@@ -15,10 +15,11 @@
   <body>
     <div id="root"></div>
 
-
+    <!-- React -->
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 
+    <!-- Babel -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <script type="text/babel">
@@ -40,7 +41,14 @@
               >
                 Crea el tuyo
               </li>
-              <li>Carrito ({cartCount})</li>
+              <li>
+                <div className="container-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="icon-cart">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                  </svg>
+                  Carrito ({cartCount})
+                </div>
+              </li>
             </ul>
           </nav>
         );
@@ -66,20 +74,25 @@
 
       function Catalog() {
         const perfumes = [
-          { name: 'Noir Essence', price: '$2,500' },
-          { name: 'Garden Paradise', price: '$2,100' },
-          { name: 'Aqua di Gerardo', price: '$2,800' },
+          { name: 'Noir Essence', price: '$2,500', image: 'https://arabicparfums.com/cdn/shop/files/16568_1200x600_crop_center.jpg?v=1765795920' },
+          { name: 'Garden Paradise', price: '$2,100', image: 'https://resources.sanborns.com.mx/imagenes-sanborns-ii/1200/8435415091275_7.jpg?scale=500&qlty=75' },
+          { name: 'Aqua di Gerardo', price: '$2,800', image: 'https://disfragancias.com/cdn/shop/files/gio_2.png?v=1725722907' },
         ];
 
         return (
           <section className="catalog">
             <h2>Perfumes de Autor</h2>
-            <div className="grid">
+            <div className="container-items">
               {perfumes.map((p, i) => (
-                <div className="card" key={i}>
-                  <div className="img"></div>
-                  <h3>{p.name}</h3>
-                  <span>{p.price}</span>
+                <div className="item" key={i}>
+                  <figure>
+                    <img src={p.image} alt={p.name} />
+                  </figure>
+                  <div className="info-product">
+                    <h2>{p.name}</h2>
+                    <p className="price">{p.price}</p>
+                    <button>Agregar</button>
+                  </div>
                 </div>
               ))}
             </div>
