@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>El brother – Perfumería de Autor</title>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      const { useState } = React;
+
+      function Navbar({ cartCount }) {
+        return (
+          <nav>
+            <div className="logo">El brother</div>
+            <ul>
+              <li>Perfumes</li>
+              <li
+                style={{ cursor: 'pointer' }}
+                onClick={() =>
+                  document
+                    .getElementById('builder')
+                    .scrollIntoView({ behavior: 'smooth' })
+                }
+              >
+                Crea el tuyo
+              </li>
+              <li>Carrito ({cartCount})</li>
+            </ul>
+          </nav>
+        );
+      }
+
+      function Hero() {
+        return (
+          <section className="hero">
+            <h1>Diseña tu propia esencia</h1>
+            <p>Perfumería de autor. Personal. Mamoncita.</p>
+            <button
+              onClick={() =>
+                document
+                  .getElementById('builder')
+                  .scrollIntoView({ behavior: 'smooth' })
+              }
+            >
+              Crear perfume
+            </button>
+          </section>
+        );
+      }
+
+      function Catalog() {
+        const perfumes = [
+          { name: 'Noir Essence', price: '$2,500' },
+          { name: 'Garden Paradise', price: '$2,100' },
+          { name: 'Aqua di Gerardo', price: '$2,800' },
+        ];
+
+        return (
+          <section className="catalog">
+            <h2>Perfumes de Autor</h2>
+            <div className="grid">
+              {perfumes.map((p, i) => (
+                <div className="card" key={i}>
+                  <div className="img"></div>
+                  <h3>{p.name}</h3>
+                  <span>{p.price}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        );
+      }
+
+      function Builder({ addToCart }) {
+        const [top, setTop] = useState('');
+        const [middle, setMiddle] = useState('');
+        const [base, setBase] = useState('');
+
+        const perfumeName = `${top || '—'} · ${middle || '—'} · ${base || '—'}`;
+
+        return (
+          <section className="builder" id="builder">
+            <h2>Crea tu perfume</h2>
+
+            <div className="row">
+              <select value={top} onChange={(e) => setTop(e.target.value)}>
+                <option value="">Nota de salida</option>
+                <option>Cítricos</option>
+                <option>Bergamota</option>
+                <option>Manzana</option>
+              </select>
+
+              <select
+                value={middle}
+                onChange={(e) => setMiddle(e.target.value)}
+              >
+                <option value="">Nota corazón</option>
+                <option>Rosa</option>
+                <option>Lavanda</option>
+                <option>Jazmín</option>
+              </select>
+
+              <select value={base} onChange={(e) => setBase(e.target.value)}>
+                <option value="">Nota fondo</option>
+                <option>Vainilla</option>
+                <option>Ámbar</option>
+                <option>Tarjeta de crédito</option>
+              </select>
+            </div>
+
+            <div className="result">
+              {top || middle || base
+                ? perfumeName
+                : 'Tu esencia aparecerá aquí'}
+            </div>
+
+            <button
+              onClick={() => {
+                if (!top || !middle || !base) {
+                  alert('Selecciona todas las notas');
+                  return;
+                }
+
+                addToCart({
+                  name: perfumeName,
+                  price: '$2,700',
+                });
+
+                alert('Perfume agregado al carrito');
+
+                setTop('');
+                setMiddle('');
+                setBase('');
+              }}
+            >
+              Agregar al carrito
+            </button>
+          </section>
+        );
+      }
+
+      function App() {
+        const [cart, setCart] = useState([]);
+
+        function addToCart(perfume) {
+          setCart([...cart, perfume]);
+        }
+
+        return (
+          <>
+            <Navbar cartCount={cart.length} />
+            <Hero />
+            <Catalog />
+            <Builder addToCart={addToCart} />
+            <footer>© 2026 El brother · Perfumería de Autor</footer>
+          </>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+  </body>
+</html>

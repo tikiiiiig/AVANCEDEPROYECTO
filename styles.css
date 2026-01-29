@@ -1,0 +1,97 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #fafafa;
+  color: #111;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.2rem 3rem;
+  background: white;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+}
+
+nav ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.hero {
+  padding: 6rem 3rem;
+  background: linear-gradient(120deg, #f4e7e9, #eef1ff);
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+}
+
+button {
+  padding: 0.8rem 2rem;
+  border: none;
+  background: black;
+  color: white;
+  cursor: pointer;
+}
+
+.catalogo {
+  padding: 4rem 3rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background: white;
+  padding: 1.2rem;
+  border-radius: 12px;
+}
+
+.img {
+  height: 180px;
+  background: #ddd;
+  border-radius: 8px;
+}
+
+.builder {
+  padding: 4rem 3rem;
+  background: white;
+}
+
+.row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+select {
+  padding: 0.8rem;
+  flex: 1;
+}
+
+.result {
+  padding: 1.5rem;
+  background: #f2f2f2;
+  margin-bottom: 1.5rem;
+}
+
+footer {
+  padding: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+}
